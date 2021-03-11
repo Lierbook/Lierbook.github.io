@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="zh" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>js三大家族 - Lierbook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Lierbook,"> 
+    <meta name="description" content="1. 三大家族和一个事件对象三大家族（offset/scroll/client）
+事件对象/event （事件被触动时，鼠标和键盘的状态）（通过属性控制）
+2. Offset家族简介offset这个,"> 
+    <meta name="author" content="Lierbook"> 
+    <link rel="alternative" href="atom.xml" title="Lierbook" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Lierbook</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">js三大家族</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">js三大家族</h1>
+        <div class="stuff">
+            <span>六月 08, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-三大家族和一个事件对象"><a href="#1-三大家族和一个事件对象" class="headerlink" title="1. 三大家族和一个事件对象"></a>1. 三大家族和一个事件对象</h2><p>三大家族（offset/scroll/client）</p>
+<p>事件对象/event （事件被触动时，鼠标和键盘的状态）（通过属性控制）</p>
+<h2 id="2-Offset家族简介"><a href="#2-Offset家族简介" class="headerlink" title="2. Offset家族简介"></a>2. Offset家族简介</h2><p>offset这个单词本身是–偏移，补偿，位移的意思。</p>
+<p>js中有一套方便的获取元素尺寸的办法就是offset家族；</p>
+<p>offsetWidth和offsetHight以及offsetLeft和offsetTop以及offsetParent</p>
+<p>共同组成了offset家族。</p>
+<h4 id="2-1-offsetWidth和offsetHight-（检测盒子自身宽高-padding-border）"><a href="#2-1-offsetWidth和offsetHight-（检测盒子自身宽高-padding-border）" class="headerlink" title="2.1 offsetWidth和offsetHight （检测盒子自身宽高+padding+border）"></a>2.1 offsetWidth和offsetHight （检测盒子自身宽高+padding+border）</h4><p>这两个属性，他们绑定在了所有的节点元素上。获取之后，只要调用这两个属性，我们就能够获取元素节点的宽和高。</p>
+<p>offset宽/高 = 盒子自身的宽/高 + padding+border；</p>
+<p>offsetWidth =width+padding+border；</p>
+<p>offsetHeight =Height+padding+border；</p>
+<h4 id="2-2-offsetLeft和offsetTop-（检测距离父盒子有定位的左-上面的距离）"><a href="#2-2-offsetLeft和offsetTop-（检测距离父盒子有定位的左-上面的距离）" class="headerlink" title="2.2 offsetLeft和offsetTop （检测距离父盒子有定位的左/上面的距离）"></a>2.2 offsetLeft和offsetTop （检测距离父盒子有定位的左/上面的距离）</h4><p>返回距离上级盒子（带有定位）左边s的位置</p>
+<p>如果父级都没有定位则以body为准</p>
+<p>offsetLeft 从父亲的padding 开始算,父亲的border 不算。</p>
+<p>在父盒子有定位的情况下，offsetLeft == style.left(去掉px)</p>
+<h4 id="2-3-offsetParent-（检测父系盒子中带有定位的父盒子节点）"><a href="#2-3-offsetParent-（检测父系盒子中带有定位的父盒子节点）" class="headerlink" title="2.3 offsetParent （检测父系盒子中带有定位的父盒子节点）"></a>2.3 offsetParent （检测父系盒子中带有定位的父盒子节点）</h4><p>1、返回改对象的父级 （带有定位）</p>
+<p> 如果当前元素的父级元素没有进行CSS定位 （position为absolute或 relative，fixed）， offsetParent为body。</p>
+<p>2、如果当前元素的父级元素中有CSS定位 （position为absolute或 relative，fixed）， offsetParent取最近的那个父级元素。</p>
+<h2 id="3-offsetLeft和style-left区别"><a href="#3-offsetLeft和style-left区别" class="headerlink" title="3. offsetLeft和style.left区别"></a>3. offsetLeft和style.left区别</h2><p>一、最大区别在于offsetLeft可以返回没有定位盒子的距离左侧的位置。而 style.left不可以</p>
+<p>二、offsetTop 返回的是数字，而 style.top 返回的是字符串，除了数字外还带有单位：px。</p>
+<p>三、offsetTop 只读，而 style.top 可读写。（只读是获取值，可写是赋值）</p>
+<p>四、如果没有给 HTML 元素指定过 top 样式，则style.top 返回的是空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style.left在=的左边和右边还不一样。（左边的时候是属性，右边的时候是值）</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Scroll家族组成"><a href="#4-Scroll家族组成" class="headerlink" title="4. Scroll家族组成"></a>4. Scroll家族组成</h2><p>ScrollWidth和scrollHeight（不包括border）</p>
+<p>检测盒子的宽高。（调用者：节点元素。属性。）</p>
+<p>盒子内容的宽高。（如果有内容超出了，显示内容的高度）</p>
+<p>IE567可以比盒子小。 IE8+火狐谷歌不能比盒子小</p>
+<h4 id="4-1-scrollLeft和scrollTop"><a href="#4-1-scrollLeft和scrollTop" class="headerlink" title="4.1 scrollLeft和scrollTop"></a>4.1 scrollLeft和scrollTop</h4><p>网页，被浏览器遮挡的头部和左边部分。</p>
+<p>被卷去的头部和左边部分。</p>
+<p>兼容性问题</p>
+<p>一、未声明 DTD（谷歌只认识他）</p>
+<p>document.body.scrollTop</p>
+<p>二、已经声明DTD（IE678只认识他）</p>
+<p>document.documentElement.scrollTop</p>
+<p>三、火狐/谷歌/ie9+以上支持的</p>
+<p>window.pageYOffset</p>
+<h4 id="4-2-兼容写法"><a href="#4-2-兼容写法" class="headerlink" title="4.2 兼容写法"></a>4.2 兼容写法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop || <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-事件event"><a href="#4-3-事件event" class="headerlink" title="4.3 事件event"></a>4.3 事件event</h4><h5 id="4-3-1-事件对象的获取（event的获取）"><a href="#4-3-1-事件对象的获取（event的获取）" class="headerlink" title="4.3.1 事件对象的获取（event的获取）"></a>4.3.1 事件对象的获取（event的获取）</h5><p>IE678中，window.event</p>
+<p>在火狐谷歌中，event或者，在事件绑定的函数中，加参，这个参数就是event.</p>
+<p>Box.onclick = function (aaa){ aaa就是event }</p>
+<h5 id="4-3-2-兼容获取方式有两种："><a href="#4-3-2-兼容获取方式有两种：" class="headerlink" title="4.3.2 兼容获取方式有两种："></a>4.3.2 兼容获取方式有两种：</h5><p>不写参数直接使用event;</p>
+<p>写参数，但是为event….var event = event || window.event;(主要用这种)</p>
+<h5 id="4-3-3-event内容重要内容"><a href="#4-3-3-event内容重要内容" class="headerlink" title="4.3.3 event内容重要内容"></a>4.3.3 event内容重要内容</h5><p>PageY/pageX: 鼠标位于整个网页页面的顶部和左侧部分的距离。（页面）</p>
+<p>ScreenY/screenX: 鼠标位于屏幕的上方和左侧的距离。（屏幕）</p>
+<p>ClientX/clientY: 鼠标位于浏览器的左侧和顶部的距离。（浏览器大小和位置）</p>
+<h5 id="4-3-4-PageY和pageX的兼容写法（很重要）"><a href="#4-3-4-PageY和pageX的兼容写法（很重要）" class="headerlink" title="4.3.4 PageY和pageX的兼容写法（很重要）"></a>4.3.4 PageY和pageX的兼容写法（很重要）</h5><p>在页面位置就等于 = 看得见的+看不见的</p>
+<p>pageY/pageX=event.clientY/clientX+scroll().top/scroll().left</p>
+<h2 id="5-client家族"><a href="#5-client家族" class="headerlink" title="5. client家族"></a>5. client家族</h2><h4 id="5-1-主要成员"><a href="#5-1-主要成员" class="headerlink" title="5.1 主要成员"></a>5.1 主要成员</h4><p>1、clientWidth 获取网页可视区域宽度（两种用法）</p>
+<p>clientHeight 获取网页可视区域高度（两种用法）</p>
+<p>调用者不同，意义不同：</p>
+<p> 盒子调用： 指盒子本身。</p>
+<p> body/html调用： 可视区域大小。</p>
+<p>2、clientX 鼠标距离可视区域左侧距离（event调用）</p>
+<p>clientY 鼠标距离可视区域上侧距离（event调用）</p>
+<p>3、clientTop/clientLeft 盒子的border宽高</p>
+<h4 id="5-2-三大家族区别（三大家族总结）"><a href="#5-2-三大家族区别（三大家族总结）" class="headerlink" title="5.2 三大家族区别（三大家族总结）"></a>5.2 三大家族区别（三大家族总结）</h4><h5 id="5-2-1-Width和height"><a href="#5-2-1-Width和height" class="headerlink" title="5.2.1 Width和height"></a>5.2.1 Width和height</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">clientWidth = width + padding</span><br><span class="line"></span><br><span class="line">clientHeight = height + padding</span><br><span class="line"></span><br><span class="line">offsetWidth = width + padding + border</span><br><span class="line"></span><br><span class="line">offsetHeight = height + padding + border</span><br><span class="line"></span><br><span class="line">scrollWidth = 内容宽度（不包含border）width + padding</span><br><span class="line"></span><br><span class="line">scrollHeight = 内容高度（不包含border）</span><br></pre></td></tr></table></figure>
+<h5 id="5-2-1-top和left"><a href="#5-2-1-top和left" class="headerlink" title="5.2.1 top和left"></a>5.2.1 top和left</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">offsetTop/offsetLeft：</span><br><span class="line"></span><br><span class="line">​ 调用者：任意元素。(盒子为主)</span><br><span class="line"></span><br><span class="line">​ 作用：距离父系盒子中带有定位的距离。</span><br><span class="line"></span><br><span class="line">scrollTop/scrollLeft:(盒子也可以调用，必须有滚动条)</span><br><span class="line"></span><br><span class="line">​ 调用者：<span class="built_in">document</span>.body.scrollTop/…..(<span class="built_in">window</span>)</span><br><span class="line"></span><br><span class="line">​ 作用：浏览器无法显示的部分（被卷去的部分）。</span><br><span class="line"></span><br><span class="line">clientY/clientX:（clientTop/clientLeft 值的是border）</span><br><span class="line"></span><br><span class="line">​ 调用者：event.clientX(event)</span><br><span class="line"></span><br><span class="line">​ 作用：鼠标距离浏览器可视区域的距离（左、上）。</span><br><span class="line"></span><br><span class="line"><span class="comment">// width和height</span></span><br><span class="line"><span class="comment">// offset带border</span></span><br><span class="line"><span class="comment">// scroll不带border，内容的宽高</span></span><br><span class="line"><span class="comment">// client不带border</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// top和left</span></span><br><span class="line"><span class="comment">// offset距离父系盒子带有定位的盒子之间的距离</span></span><br><span class="line"><span class="comment">// scroll被卷去的部分的距离</span></span><br><span class="line"><span class="comment">// clientborder的宽高</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//clientX和clientY</span></span><br><span class="line"><span class="comment">// event调用，鼠标距离浏览器的可视区域的距离</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-3-Onresize事件"><a href="#5-3-Onresize事件" class="headerlink" title="5.3  Onresize事件"></a>5.3  Onresize事件</h4><p>只要浏览器的大小改变，哪怕1像素，都会触动这个事件。</p>
+<h4 id="5-4-事件总结"><a href="#5-4-事件总结" class="headerlink" title="5.4  事件总结"></a>5.4  事件总结</h4><p>区分：</p>
+<p>1.window.onscroll 屏幕滑动</p>
+<p>2.window.onresize 浏览器大小变化</p>
+<p>3.window.onload 页面加载完毕</p>
+<p>4.div.onmousemove 鼠标在盒子上移动</p>
+<p> （注意：不是盒子移动！！！）</p>
+<p>5.onmouseup/onmousedown == onclick</p>
+<h4 id="5-5-获得屏幕宽高"><a href="#5-5-获得屏幕宽高" class="headerlink" title="5.5  获得屏幕宽高"></a>5.5  获得屏幕宽高</h4><p>window.screen.width</p>
+<p>分辨率是屏幕图像的精密度，指显示器所能显示的像素有多少。</p>
+<p>我们的电脑一般：</p>
+<p>横向1280个像素点，</p>
+<p>纵向960个像素点。</p>
+<p>我们看电影的时候是满屏和半屏的，就是这。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/1338355334.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/1355846808.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%89%E5%A4%A7%E5%AE%B6%E6%97%8F%E5%92%8C%E4%B8%80%E4%B8%AA%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">1. 三大家族和一个事件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Offset%E5%AE%B6%E6%97%8F%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">2. Offset家族简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-offsetWidth%E5%92%8CoffsetHight-%EF%BC%88%E6%A3%80%E6%B5%8B%E7%9B%92%E5%AD%90%E8%87%AA%E8%BA%AB%E5%AE%BD%E9%AB%98-padding-border%EF%BC%89"><span class="toc-number">2.0.1.</span> <span class="toc-text">2.1 offsetWidth和offsetHight （检测盒子自身宽高+padding+border）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-offsetLeft%E5%92%8CoffsetTop-%EF%BC%88%E6%A3%80%E6%B5%8B%E8%B7%9D%E7%A6%BB%E7%88%B6%E7%9B%92%E5%AD%90%E6%9C%89%E5%AE%9A%E4%BD%8D%E7%9A%84%E5%B7%A6-%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%B7%9D%E7%A6%BB%EF%BC%89"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.2 offsetLeft和offsetTop （检测距离父盒子有定位的左&#x2F;上面的距离）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-offsetParent-%EF%BC%88%E6%A3%80%E6%B5%8B%E7%88%B6%E7%B3%BB%E7%9B%92%E5%AD%90%E4%B8%AD%E5%B8%A6%E6%9C%89%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%88%B6%E7%9B%92%E5%AD%90%E8%8A%82%E7%82%B9%EF%BC%89"><span class="toc-number">2.0.3.</span> <span class="toc-text">2.3 offsetParent （检测父系盒子中带有定位的父盒子节点）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-offsetLeft%E5%92%8Cstyle-left%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">3. offsetLeft和style.left区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Scroll%E5%AE%B6%E6%97%8F%E7%BB%84%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">4. Scroll家族组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-scrollLeft%E5%92%8CscrollTop"><span class="toc-number">4.0.1.</span> <span class="toc-text">4.1 scrollLeft和scrollTop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E5%85%BC%E5%AE%B9%E5%86%99%E6%B3%95"><span class="toc-number">4.0.2.</span> <span class="toc-text">4.2 兼容写法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E4%BA%8B%E4%BB%B6event"><span class="toc-number">4.0.3.</span> <span class="toc-text">4.3 事件event</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-1-%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%8E%B7%E5%8F%96%EF%BC%88event%E7%9A%84%E8%8E%B7%E5%8F%96%EF%BC%89"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">4.3.1 事件对象的获取（event的获取）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-2-%E5%85%BC%E5%AE%B9%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%9A"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">4.3.2 兼容获取方式有两种：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-3-event%E5%86%85%E5%AE%B9%E9%87%8D%E8%A6%81%E5%86%85%E5%AE%B9"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">4.3.3 event内容重要内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-4-PageY%E5%92%8CpageX%E7%9A%84%E5%85%BC%E5%AE%B9%E5%86%99%E6%B3%95%EF%BC%88%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">4.3.4 PageY和pageX的兼容写法（很重要）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-client%E5%AE%B6%E6%97%8F"><span class="toc-number">5.</span> <span class="toc-text">5. client家族</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E4%B8%BB%E8%A6%81%E6%88%90%E5%91%98"><span class="toc-number">5.0.1.</span> <span class="toc-text">5.1 主要成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E4%B8%89%E5%A4%A7%E5%AE%B6%E6%97%8F%E5%8C%BA%E5%88%AB%EF%BC%88%E4%B8%89%E5%A4%A7%E5%AE%B6%E6%97%8F%E6%80%BB%E7%BB%93%EF%BC%89"><span class="toc-number">5.0.2.</span> <span class="toc-text">5.2 三大家族区别（三大家族总结）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-1-Width%E5%92%8Cheight"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">5.2.1 Width和height</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-1-top%E5%92%8Cleft"><span class="toc-number">5.0.2.2.</span> <span class="toc-text">5.2.1 top和left</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-Onresize%E4%BA%8B%E4%BB%B6"><span class="toc-number">5.0.3.</span> <span class="toc-text">5.3  Onresize事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BB%93"><span class="toc-number">5.0.4.</span> <span class="toc-text">5.4  事件总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-%E8%8E%B7%E5%BE%97%E5%B1%8F%E5%B9%95%E5%AE%BD%E9%AB%98"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.5  获得屏幕宽高</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":300,"hOffset":0,"vOffset":-40},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

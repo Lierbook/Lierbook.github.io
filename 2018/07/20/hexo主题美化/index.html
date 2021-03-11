@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="zh" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>hexo主题美化 - Lierbook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Lierbook,"> 
+    <meta name="description" content="上期我们使用hexo和git进行了个人博客的基础搭建，搭建好的博客虽然已具备基本的使用功能但在页面美化和功能上还是有很多的不足，今天我给大家分享一下hexo博客的主题美化。
+
+
+
+
+一.更换主题
+
+,"> 
+    <meta name="author" content="Lierbook"> 
+    <link rel="alternative" href="atom.xml" title="Lierbook" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Lierbook</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">hexo主题美化</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">hexo主题美化</h1>
+        <div class="stuff">
+            <span>七月 20, 2018</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/git/" rel="tag">git</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>上期我们使用hexo和git进行了个人博客的基础搭建，搭建好的博客虽然已具备基本的使用功能但在页面美化和功能上还是有很多的不足，今天我给大家分享一下hexo博客的主题美化。</p>
+<br>
+
+<br>
+
+<h2 id="一-更换主题"><a href="#一-更换主题" class="headerlink" title="一.更换主题"></a>一.更换主题</h2><br>
+
+<p>为了让它看起来更美观一些，我们可以为其更换主题（当然也可以自己在默认主</p>
+<p> 题下自己编写美化博客界面）。这里以使用github上的next主题为例：</p>
+<br>
+
+<h3 id="1-创建next文件夹"><a href="#1-创建next文件夹" class="headerlink" title="1.创建next文件夹"></a>1.创建next文件夹</h3><br>
+
+<p>切换到本地博客根目录下，在主题文件thems下创建一个新文件夹next存放即将下载的next主题(git bash)</p>
+<br>
+
+<h3 id="2-下载主题"><a href="#2-下载主题" class="headerlink" title="2.下载主题"></a>2.下载主题</h3><br>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;iissnan&#x2F;hexo-theme-next themes&#x2F;next        &#x2F;&#x2F;下载主题</span><br></pre></td></tr></table></figure>
+
+<p>下载成之后我们会看到next的主题已经存在thems里了如下：</p>
+<p><img src="https://p.130014.xyz/2021/03/10/121b0ff45f2a25754.png"></p>
+<br>
+
+<h3 id="3-修改博客配置文件，更换主题配置"><a href="#3-修改博客配置文件，更换主题配置" class="headerlink" title="3.修改博客配置文件，更换主题配置"></a>3.修改博客配置文件，更换主题配置</h3><br>
+
+<p>修改博客根目录(不是next主题)下的_config.yml文件，搜索theme字段，并将其值修改为next</p>
+<p><img src="https://p.130014.xyz/2021/03/10/186165491ac1c3a1a.png"></p>
+<br>
+
+<p>然后在控制台（git bash）下输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean   &#x2F;&#x2F;清理缓存</span><br><span class="line">hexo g       &#x2F;&#x2F;重新生成博客代码 </span><br><span class="line">hexo d       &#x2F;&#x2F;部署到本地</span><br></pre></td></tr></table></figure>
+
+<p>再次打开我们的博客网站<a target="_blank" rel="noopener" href="https://dreamcoffeezs.github.io/">https://UserName.github.io</a>，将会看到更换主题后</p>
+<p><img src="https://p.130014.xyz/2021/03/10/16a5f77e04e2550ef.png"></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">更多主题美化</a></p>
+<br>
+
+<br>
+
+<h2 id="二-Live2D看板娘"><a href="#二-Live2D看板娘" class="headerlink" title="二.Live2D看板娘"></a>二.Live2D看板娘</h2><br>
+
+<h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+<p>安装过程中可能遇到一些依赖性问题，按提示做就行</p>
+<p><img src="https://img-blog.csdnimg.cn/20200129105235873.png"></p>
+<p>遇到这种就运行<code>npm audit fix</code>，如果还不成功，会提示你用<code>npm audit fix --force</code>，一般这个时候就成功了。<br>成功了之后可以看到当前目录的<code>node_modules/</code>下有个<code>live2d-widget</code>目录，这是动画的主配置：</p>
+<p><img src="https://img-blog.csdnimg.cn/2020012910571945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2MjM5NTY5,size_16,color_FFFFFF,t_70"></p>
+<p>这个时候是没有模型文件的，所以下一步是下载模型文件</p>
+<br>
+
+<h3 id="2-下载model文件"><a href="#2-下载model文件" class="headerlink" title="2.下载model文件"></a>2.下载model文件</h3><br>
+
+<p>下载模型文件：<br>模型文件可直接用npm安装：如下<br>npm install live2d-widget-model-shizuku</p>
+<p><br>安装完成可以在node_modules/下看到live2d-widget-model-shizuku文件夹</p>
+<p><img src="https://img-blog.csdnimg.cn/20200129110058553.png"></p>
+<h3 id="3-添加live2d看板娘到hexo"><a href="#3-添加live2d看板娘到hexo" class="headerlink" title="3.添加live2d看板娘到hexo"></a>3.添加live2d看板娘到hexo</h3><p>配置Hexo的主<code>_config.yml</code></p>
+<p>添加以下代码到配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## Live2D看板娘</span><br><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  pluginModelPath: assets&#x2F;</span><br><span class="line">  model:</span><br><span class="line">    #模板目录，在node_modules里</span><br><span class="line">    use: live2d-widget-model-shizuku  </span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 300 </span><br><span class="line">    height: 600</span><br><span class="line">  mobile:</span><br><span class="line">    # 在手机端显示</span><br><span class="line">    show: false   </span><br><span class="line">  rect:</span><br><span class="line">    opacity:0.7</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一.更换主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAnext%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">1.1.</span> <span class="toc-text">1.创建next文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">2.下载主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">3.修改博客配置文件，更换主题配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-Live2D%E7%9C%8B%E6%9D%BF%E5%A8%98"><span class="toc-number">2.</span> <span class="toc-text">二.Live2D看板娘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.</span> <span class="toc-text">1.安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BDmodel%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">2.下载model文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%88%B0hexo"><span class="toc-number">2.3.</span> <span class="toc-text">3.添加live2d看板娘到hexo</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":300,"hOffset":0,"vOffset":-40},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="zh" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>creat-react-app - Lierbook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Lierbook,"> 
+    <meta name="description" content="以此文章记录如何创建一个react app和一些常用配置，会不定期更新
+
+
+
+
+一、初始化React App
+
+1、安装
+
+12# 全局安装npm install -g create-react-a,"> 
+    <meta name="author" content="Lierbook"> 
+    <link rel="alternative" href="atom.xml" title="Lierbook" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Lierbook</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">creat-react-app</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">creat-react-app</h1>
+        <div class="stuff">
+            <span>一月 20, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>以此文章记录如何创建一个react app和一些常用配置，会不定期更新</p>
+<br>
+
+<br>
+
+<h2 id="一、初始化React-App"><a href="#一、初始化React-App" class="headerlink" title="一、初始化React App"></a>一、初始化React App</h2><br>
+
+<h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><br>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 全局安装</span><br><span class="line">npm install -g create-react-app</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="2、创建一个app项目"><a href="#2、创建一个app项目" class="headerlink" title="2、创建一个app项目"></a>2、创建一个app项目</h3><br>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 构建一个my-app的项目</span><br><span class="line">npm init react-app my-app</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="二、webpack配置"><a href="#二、webpack配置" class="headerlink" title="二、webpack配置"></a>二、webpack配置</h2><br>
+
+<h3 id="1、react-app-rewired"><a href="#1、react-app-rewired" class="headerlink" title="1、react-app-rewired"></a>1、react-app-rewired</h3><br>
+
+<p>使用 react-app-rewired 添加或修改 webpack 的 配置</p>
+<h4 id="1-1、安装"><a href="#1-1、安装" class="headerlink" title="1.1、安装"></a>1.1、安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i react-app-rewired --save-dev</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="1-2、修改package-json"><a href="#1-2、修改package-json" class="headerlink" title="1.2、修改package.json"></a>1.2、修改package.json</h4><br>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;react-app-rewired start&quot;</span>,</span><br><span class="line">    <span class="string">&quot;build&quot;</span>: <span class="string">&quot;react-app-rewired build&quot;</span>,</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;react-app-rewired test&quot;</span>,</span><br><span class="line">    <span class="string">&quot;eject&quot;</span>: <span class="string">&quot;react-scripts eject&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="1-3、新建配置文件"><a href="#1-3、新建配置文件" class="headerlink" title="1.3、新建配置文件"></a>1.3、新建配置文件</h4><br>
+
+<p>在根目录下新建config-override.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">dir</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> path.join(__dirname, <span class="string">&#x27;.&#x27;</span>, dir)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">override</span>(<span class="params">config, env</span>) </span>&#123;</span><br><span class="line">    config.resolve.alias = &#123;</span><br><span class="line">        <span class="string">&#x27;@components&#x27;</span>: resolve(<span class="string">&#x27;src/components&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;@pages&#x27;</span>: resolve(<span class="string">&#x27;src/pages&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;@util&#x27;</span>: resolve(<span class="string">&#x27;src/util&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;@config&#x27;</span>: resolve(<span class="string">&#x27;config&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="2、proxy代理配置"><a href="#2、proxy代理配置" class="headerlink" title="2、proxy代理配置"></a>2、proxy代理配置</h3><br>
+
+<h4 id="2-1、安装"><a href="#2-1、安装" class="headerlink" title="2.1、安装"></a>2.1、安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm http-proxy-middleware -dev</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="2-2、-新建配置文件"><a href="#2-2、-新建配置文件" class="headerlink" title="2.2、 新建配置文件"></a>2.2、 新建配置文件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">&#x27;http-proxy-middleware&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">app</span>) </span>&#123;</span><br><span class="line">    app.use(</span><br><span class="line">        proxy(<span class="string">&#x27;/api&#x27;</span>, &#123;</span><br><span class="line">            target: <span class="string">&#x27;http://localhost:4000&#x27;</span>,</span><br><span class="line">            changeOrigin: <span class="literal">true</span>,</span><br><span class="line">            pathRewrite: &#123;</span><br><span class="line">                <span class="string">&quot;^/api&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">    app.use(proxy(...));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>注意：代理路径匹配是懒惰的，当满足正则时则停止匹配。因此，当添加多个代理配置时，要注意代理路径的冲突，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.use(</span><br><span class="line">    proxy(<span class="string">&#x27;/api/&#x27;</span>, &#123;</span><br><span class="line">        target: <span class="string">&#x27;http://localhost:3000&#x27;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br><span class="line">app.use(</span><br><span class="line">    proxy(<span class="string">&#x27;/api2&#x27;</span>,&#123;</span><br><span class="line">        target: <span class="string">&#x27;http://localhost:4000&#x27;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>当请求路径为<code>/api2/audio</code> 时，我们想代理到 4000端口，但 却被3000端口代理了，这是因为<code>/api</code>满足<code>/api2</code>,则我们在配置时应该参照如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.use(</span><br><span class="line">    proxy(<span class="string">&#x27;/api&#x27;</span>, &#123;</span><br><span class="line">        target: <span class="string">&#x27;http://localhost:3000&#x27;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br><span class="line">app.use(</span><br><span class="line">    proxy(<span class="string">&#x27;/api2/&#x27;</span>,&#123;</span><br><span class="line">        target: <span class="string">&#x27;http://localhost:4000&#x27;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/1338355334.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/1355846808.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96React-App"><span class="toc-number">1.</span> <span class="toc-text">一、初始化React App</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">1、安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAapp%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">2、创建一个app项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81webpack%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">二、webpack配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81react-app-rewired"><span class="toc-number">2.1.</span> <span class="toc-text">1、react-app-rewired</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1、安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2%E3%80%81%E4%BF%AE%E6%94%B9package-json"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2、修改package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3%E3%80%81%E6%96%B0%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.3.</span> <span class="toc-text">1.3、新建配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81proxy%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">2、proxy代理配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1、安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81-%E6%96%B0%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2、 新建配置文件</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":300,"hOffset":0,"vOffset":-40},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="zh" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>浅析Javascript中作用域、作用域链和预解析 - Lierbook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Lierbook,"> 
+    <meta name="description" content="在 JavaScript 中, 对象和函数同样也是变量。在 JavaScript 中, 作用域为可访问变量，对象，函数的集合。JavaScript 函数作用域: 作用域在函数内修改。
+
+
+
+
+
+
+一,"> 
+    <meta name="author" content="Lierbook"> 
+    <link rel="alternative" href="atom.xml" title="Lierbook" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Lierbook</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">浅析Javascript中作用域、作用域链和预解析</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">浅析Javascript中作用域、作用域链和预解析</h1>
+        <div class="stuff">
+            <span>十月 12, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%96%B0%E6%8A%80%E6%9C%AF/" rel="tag">新技术</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>在 JavaScript 中, 对象和函数同样也是变量。在 JavaScript 中, 作用域为可访问变量，对象，函数的集合。JavaScript 函数作用域: 作用域在函数内修改。</p>
+<br>
+
+<br>
+
+<br>
+
+<h2 id="一、作用域"><a href="#一、作用域" class="headerlink" title="一、作用域"></a>一、作用域</h2><br>
+
+<p>作用域（scope），程序设计概念，通常来说，一段程序代码中所用到的名字并不总是有效/可用的，而限定这个名字的可用性的代码范围就是这个名字的作用域。</p>
+<p>作用域的使用提高了程序逻辑的局部性，增强程序的可靠性，减少名字冲突。</p>
+<br>
+
+<h3 id="1-全局作用域（全局变量）"><a href="#1-全局作用域（全局变量）" class="headerlink" title="1.全局作用域（全局变量）"></a>1.全局作用域（全局变量）</h3><br>
+
+<p><strong>全局变量，原理就是将变量挂载到window对象中.</strong></p>
+<p><strong>全局变量拥有全局的作用域，可在任意地方被调用</strong></p>
+<br>
+
+<p>全局变量有两种声明方式</p>
+<h4 id="（1）函数外部"><a href="#（1）函数外部" class="headerlink" title="（1）函数外部"></a>（1）函数外部</h4><br>
+
+<p>(写在函数外面的都是全局变量)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> num = <span class="number">15</span>; <span class="comment">//全局变量</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> num = <span class="number">10</span>; <span class="comment">//不是全局变量</span></span></span><br><span class="line"><span class="javascript">        	<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">/*----*/</span> </span></span><br><span class="line">        	&#125;</span><br><span class="line">            f2();</span><br><span class="line">        &#125;</span><br><span class="line">	f();</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(num); <span class="comment">//  15</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="（2）函数内部"><a href="#（2）函数内部" class="headerlink" title="（2）函数内部"></a>（2）函数内部</h4><br>
+
+<p>(不加var的变量声明，隐式全局变量)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    	num = <span class="number">10</span>; <span class="comment">//隐式全局变量</span></span></span><br><span class="line">    &#125;</span><br><span class="line">	f();</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(num); <span class="comment">// 10</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="全局变量与隐式全局变量的区别"><a href="#全局变量与隐式全局变量的区别" class="headerlink" title="全局变量与隐式全局变量的区别"></a>全局变量与隐式全局变量的区别</h4><br>
+
+<p>隐式全局变量可以通过delete关键字来删除，全局变量不可以</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//全局变量不可被delete</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> a = <span class="number">2</span>; <span class="comment">//全局变量</span></span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//****</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">//  2</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">delete</span> a;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">//  2</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//隐式全局变量被delete</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        a = <span class="number">2</span>; <span class="comment">//隐式全局变量</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">//  2</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">delete</span> a;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">//  not defined (已被删除)</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="2-局部作用域-局部变量"><a href="#2-局部作用域-局部变量" class="headerlink" title="2.局部作用域(局部变量)"></a>2.局部作用域(局部变量)</h3><br>
+
+<p>局部变量：写在函数体里面的变量</p>
+<p>局部变量只可以在当前函数内部使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> num = <span class="number">10</span>; <span class="comment">//局部变量</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(num); <span class="comment">// 10</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    	f2();</span><br><span class="line">    &#125;</span><br><span class="line">	f();</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(num); <span class="comment">//  not defined</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<h2 id="二、作用域链"><a href="#二、作用域链" class="headerlink" title="二、作用域链"></a>二、作用域链</h2><br>
+
+<p>作用域链简而言之就是，调用变量时，若当前作用域内没有该变量时就向它的上一级作用域去寻找。</p>
+<p>Javascript用的是词法作用域（静态作用域）</p>
+<br>
+
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">    <span class="comment">/* 0级作用域 */</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> a = <span class="number">1</span>;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params"></span>)</span>&#123;    <span class="comment">/* 1级作用域 */</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//var a = 2;</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">bb</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/* 2级作用域 */</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//var a = 3;</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(a);  <span class="comment">// 1</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    bb();</span><br><span class="line">&#125;</span><br><span class="line">aa();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><br>作用过程：</p>
+<ol>
+<li>当运行到console.log(a)时，会在当前作用域（2级作用域）内寻找是否有a可用；</li>
+<li>若有直接使用，否则向上一级作用域（1级作用域）去寻找；</li>
+<li>此时来到1级作用域，若此时有a可用则用，否则继续向上一级寻找，直到到达0级作用域；</li>
+<li>此时来到0级作用域，若此时有a可用则用，否则报错；</li>
+</ol>
+<p><img src="https://p.130014.xyz/2021/03/11/8001ec9ad2141255021e73e9fded448d.jpg"></p>
+<br>
+
+<p><strong>值得注意的是：作用域链的始发点与函数的调用位置无关，而与函数的声明位置有关</strong> 例子如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> value = <span class="number">1</span>;</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	    <span class="built_in">console</span>.log(value);</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	    <span class="keyword">var</span> value = <span class="number">2</span>;</span></span><br><span class="line">	    foo();</span><br><span class="line">	&#125;</span><br><span class="line">	bar();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><br><br></p>
+<h2 id="三、预解析"><a href="#三、预解析" class="headerlink" title="三、预解析"></a>三、预解析</h2><br>
+
+<p>当浏览器执行Javascript代码时，为了提高执行效率会在代码解释执行前进行预解析处理。</p>
+<br>
+
+<p>预解析处理规则：</p>
+<p>\1. 变量提升 仅仅将变量声明提升到当前作用域的最上面，不包括变量的赋值<br>\2. 函数提升 将函数的声明提升到当前作用域的最上面，不包括函数的调用 <strong>函数的声明会提前到变量声明之前</strong></p>
+<br>
+
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><br>
+
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">//undefined</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> a = <span class="number">10</span>;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码结果打印为undefined,而不是10，这是为什么呢？</p>
+<p>我们来看看与解析之后的结果，</p>
+<p>预解析为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> a</span></span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a);</span></span><br><span class="line">	a = 10;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>由于变量声明被提升到作用域最前端，而赋值没有被提升，导致执行console.log(a);时 a还未被赋值。</p>
+<br>
+
+<h3 id="函数提升"><a href="#函数提升" class="headerlink" title="函数提升"></a>函数提升</h3><br>
+
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    f1();</span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">/*-----*/</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>被解析为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">/*-----*/</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    f1();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="函数的声明会提前到变量声明之前"><a href="#函数的声明会提前到变量声明之前" class="headerlink" title="函数的声明会提前到变量声明之前"></a>函数的声明会提前到变量声明之前</h3><br>
+
+<p>函数提升和变量提升同时发生时，函数的声明会提前到变量声明之前。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> a = <span class="number">3</span>;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="number">10</span>);</span></span><br><span class="line">    &#125;   </span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(a);</span></span><br><span class="line">    a();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>被解析为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="number">10</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> a;</span></span><br><span class="line">	a = 3</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(a);</span></span><br><span class="line"><span class="javascript">    a(); <span class="comment">//not function  因为此时a为变量而不是函数</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>值得注意的是：</strong></p>
+<p>1.函数是可以被打印的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*----*/</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(a); <span class="comment">//打印函数a</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.变量a的赋值可以被普通类型和函数互相取代</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> a；</span></span><br><span class="line"><span class="javascript">    a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">/*----*/</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(a); <span class="comment">//打印函数a</span></span></span><br><span class="line">	a = 1;</span><br><span class="line"><span class="javascript">	<span class="built_in">console</span>.log(a); <span class="comment">// 1；</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="匿名函数的申明不遵循预解析规则"><a href="#匿名函数的申明不遵循预解析规则" class="headerlink" title="匿名函数的申明不遵循预解析规则"></a>匿名函数的申明不遵循预解析规则</h3><br>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    f();  <span class="comment">//报错</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">/*----*/</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为解析前后代码相同 执行 <strong>f()</strong> 时，f未被声明为函数类型。</p>
+<br>
+
+<h3 id="隐式全局变量的注意点"><a href="#隐式全局变量的注意点" class="headerlink" title="隐式全局变量的注意点"></a>隐式全局变量的注意点</h3><br>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    f();</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(a);  <span class="comment">//undefined</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(b);  <span class="comment">//9</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> a = b = c = <span class="number">9</span>;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(a); <span class="comment">//9</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(b); <span class="comment">//9</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>被解析为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> a;  <span class="comment">//局部变量</span></span></span><br><span class="line">      a = 9;  </span><br><span class="line"><span class="javascript">      b = <span class="number">9</span>;  <span class="comment">//隐式全局变量</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(a);  <span class="comment">//9</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(b);  <span class="comment">//9</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    f();</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(b);  <span class="comment">//9</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(a);  <span class="comment">//undefined   因为a是局部变量</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="https://link.hhtjim.com/163/1382838382.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">一、作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1.全局作用域（全局变量）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%87%BD%E6%95%B0%E5%A4%96%E9%83%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">（1）函数外部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">（2）函数内部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9A%90%E5%BC%8F%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.3.</span> <span class="toc-text">全局变量与隐式全局变量的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">2.局部作用域(局部变量)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">2.</span> <span class="toc-text">二、作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">三、预解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-number">3.1.</span> <span class="toc-text">变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87"><span class="toc-number">3.2.</span> <span class="toc-text">函数提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%A3%B0%E6%98%8E%E4%BC%9A%E6%8F%90%E5%89%8D%E5%88%B0%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%E4%B9%8B%E5%89%8D"><span class="toc-number">3.3.</span> <span class="toc-text">函数的声明会提前到变量声明之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%B3%E6%98%8E%E4%B8%8D%E9%81%B5%E5%BE%AA%E9%A2%84%E8%A7%A3%E6%9E%90%E8%A7%84%E5%88%99"><span class="toc-number">3.4.</span> <span class="toc-text">匿名函数的申明不遵循预解析规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">3.5.</span> <span class="toc-text">隐式全局变量的注意点</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":300,"hOffset":0,"vOffset":-40},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

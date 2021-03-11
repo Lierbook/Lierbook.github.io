@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="zh" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MySql基础使用 - Lierbook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Lierbook,"> 
+    <meta name="description" content="1、确保已安装wamp并且启动成功详情请见wamp环境搭建
+2、下载navicat premium文件 -&amp;gt; 新建连接
+点击自己新建的链接，新建数据库 字符集uft8 排序规则utf8_bin,"> 
+    <meta name="author" content="Lierbook"> 
+    <link rel="alternative" href="atom.xml" title="Lierbook" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Lierbook</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">MySql基础使用</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">MySql基础使用</h1>
+        <div class="stuff">
+            <span>十月 20, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/MySql/" rel="tag">MySql</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1、确保已安装wamp并且启动成功"><a href="#1、确保已安装wamp并且启动成功" class="headerlink" title="1、确保已安装wamp并且启动成功"></a>1、确保已安装wamp并且启动成功</h2><p>详情请见<a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_39502694/article/details/99672941">wamp环境搭建</a></p>
+<h2 id="2、下载navicat-premium"><a href="#2、下载navicat-premium" class="headerlink" title="2、下载navicat premium"></a>2、下载navicat premium</h2><p>文件 -&gt; 新建连接</p>
+<p>点击自己新建的链接，新建数据库 字符集uft8 排序规则utf8_bin</p>
+<h2 id="3、在项目文件夹中安装mySQL"><a href="#3、在项目文件夹中安装mySQL" class="headerlink" title="3、在项目文件夹中安装mySQL"></a>3、在项目文件夹中安装mySQL</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line">npm install mysqljs/mysql</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、在服务器js文件中使用mysql包"><a href="#4、在服务器js文件中使用mysql包" class="headerlink" title="4、在服务器js文件中使用mysql包"></a>4、在服务器js文件中使用mysql包</h2><h4 id="引入mysql包"><a href="#引入mysql包" class="headerlink" title="引入mysql包"></a>引入mysql包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建数据库链接"><a href="#创建数据库链接" class="headerlink" title="创建数据库链接"></a>创建数据库链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> connection = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="string">&#x27;localhost&#x27;</span>, <span class="comment">//数据库所在的服务器的域名（或ip地址）</span></span><br><span class="line">    user: <span class="string">&#x27;me&#x27;</span>, <span class="comment">//登录数据库的账号</span></span><br><span class="line">    password: <span class="string">&#x27;secret&#x27;</span>, <span class="comment">//登陆数据库的密码</span></span><br><span class="line">    database: <span class="string">&#x27;book&#x27;</span> <span class="comment">//数据库的名称</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行链接操作"><a href="#执行链接操作" class="headerlink" title="执行链接操作"></a>执行链接操作</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.connect();</span><br></pre></td></tr></table></figure>
+
+<h4 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h4><p>数据库的操作是异步的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="string">&#x27;数据库操作语句&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;The solution is:&#x27;</span>,results[<span class="number">0</span>].solution);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭数据库"><a href="#关闭数据库" class="headerlink" title="关闭数据库"></a>关闭数据库</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.end();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="数据库常用语句"><a href="#数据库常用语句" class="headerlink" title="数据库常用语句"></a>数据库常用语句</h2><p>先给出代码大概框架</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> connection = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="string">&#x27;localhost&#x27;</span>, <span class="comment">//数据库所在的服务器的域名（或ip地址）</span></span><br><span class="line">    user: <span class="string">&#x27;root&#x27;</span>, <span class="comment">//登录数据库的账号</span></span><br><span class="line">    password: <span class="string">&#x27;&#x27;</span>, <span class="comment">//登陆数据库的密码</span></span><br><span class="line">    database: <span class="string">&#x27;book&#x27;</span> <span class="comment">//数据库的名称</span></span><br><span class="line">&#125;);</span><br><span class="line">connection.connect();</span><br><span class="line"><span class="comment">//此处开始进行数据库数据操作**********************之后的代码只有此处不同</span></span><br><span class="line"><span class="comment">// ？ 是为了给后面的数据进行填充</span></span><br><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;insert into book set ?&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    name: <span class="string">&#x27;百年孤独&#x27;</span>,</span><br><span class="line">    author: <span class="string">&#x27;加西亚·马尔克斯&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line">connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果 是个对象</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="function"><span class="title">if</span>(<span class="params">results.affectedRows == <span class="number">1</span></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;数据插入成功！&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//此处结束数据库数据操作************************</span></span><br><span class="line">connection.end();</span><br></pre></td></tr></table></figure>
+
+<h4 id="增"><a href="#增" class="headerlink" title="增"></a>增</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ？ 是为了给后面的数据进行填充</span></span><br><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;insert into book set ?&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    name: <span class="string">&#x27;百年孤独&#x27;</span>,</span><br><span class="line">    author: <span class="string">&#x27;加西亚·马尔克斯&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line">connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="function"><span class="title">if</span>(<span class="params">results.affectedRows == <span class="number">1</span></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;数据插入成功！&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删"><a href="#删" class="headerlink" title="删"></a>删</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;delete from book where id=?&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> data = [<span class="number">2</span>];</span><br><span class="line">connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="function"><span class="title">if</span>(<span class="params">results.affectedRows == <span class="number">1</span></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;数据删除成功！&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="改"><a href="#改" class="headerlink" title="改"></a>改</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;update book set name=?,author=? where id=?&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> data = [<span class="string">&#x27;红楼梦&#x27;</span>,<span class="string">&#x27;曹雪芹&#x27;</span>,<span class="number">2</span>];</span><br><span class="line">connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="function"><span class="title">if</span>(<span class="params">results.affectedRows == <span class="number">1</span></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;数据更新成功！&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查"><a href="#查" class="headerlink" title="查"></a>查</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//let sql = &#x27;select * from book&#x27;; // * 查询范围是全部数据</span></span><br><span class="line"><span class="comment">//let data = null;</span></span><br><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;select * from book where id = ?&#x27;</span>;  <span class="comment">//从所有数据中查询id为？的数据</span></span><br><span class="line"><span class="keyword">let</span> data = [<span class="number">1</span>];</span><br><span class="line">connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123; <span class="comment">//results 数据库语句执行完后的结果</span></span><br><span class="line">    <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="built_in">console</span>.log(results[<span class="number">0</span>].name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>不难发现对数据的增删改查在代码层面是类似的。</p>
+<h4 id="封装对数据库的操作"><a href="#封装对数据库的操作" class="headerlink" title="封装对数据库的操作"></a>封装对数据库的操作</h4><p>新建一个db.js文件，此js中的代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="comment">//当sql是插入操作时，data需要是一个对象</span></span><br><span class="line"><span class="comment">//当sql是删改查时，data是一个数组数组中的数据与表中的字段顺序要一一对应</span></span><br><span class="line"><span class="built_in">exports</span>.base = <span class="function">(<span class="params">sql,data,callback</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> connection = mysql.createConnection(&#123;</span><br><span class="line">        host: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">        user: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        database: <span class="string">&#x27;book&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">    connection.connect();</span><br><span class="line">    connection.query(sql,data,<span class="function"><span class="keyword">function</span>(<span class="params">error,results,fields</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(error) <span class="keyword">throw</span> error;</span><br><span class="line">        callback(results);</span><br><span class="line">    &#125;);</span><br><span class="line">    connection.end();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/1338355334.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/1355846808.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%A1%AE%E4%BF%9D%E5%B7%B2%E5%AE%89%E8%A3%85wamp%E5%B9%B6%E4%B8%94%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F"><span class="toc-number">1.</span> <span class="toc-text">1、确保已安装wamp并且启动成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E4%B8%8B%E8%BD%BDnavicat-premium"><span class="toc-number">2.</span> <span class="toc-text">2、下载navicat premium</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E5%AE%89%E8%A3%85mySQL"><span class="toc-number">3.</span> <span class="toc-text">3、在项目文件夹中安装mySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8js%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8mysql%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">4、在服务器js文件中使用mysql包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E5%85%A5mysql%E5%8C%85"><span class="toc-number">4.0.1.</span> <span class="toc-text">引入mysql包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E9%93%BE%E6%8E%A5"><span class="toc-number">4.0.2.</span> <span class="toc-text">创建数据库链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E9%93%BE%E6%8E%A5%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.3.</span> <span class="toc-text">执行链接操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.0.4.</span> <span class="toc-text">操作数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.0.5.</span> <span class="toc-text">关闭数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.</span> <span class="toc-text">数据库常用语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E"><span class="toc-number">5.0.1.</span> <span class="toc-text">增</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0"><span class="toc-number">5.0.2.</span> <span class="toc-text">删</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9"><span class="toc-number">5.0.3.</span> <span class="toc-text">改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5"><span class="toc-number">5.0.4.</span> <span class="toc-text">查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">5.0.5.</span> <span class="toc-text">封装对数据库的操作</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":300,"hOffset":0,"vOffset":-40},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
